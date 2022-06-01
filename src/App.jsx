@@ -9,12 +9,12 @@ function App() {
     const [file] = e.target.files
     const convertedImage = encode(URL.createObjectURL(file))
     setImageBase64(convertedImage)
-    console.log('encoded', convertedImage)
   }
 
   return (
     <div>
       {imageBase64 ? (<Meme encodedImage={imageBase64} />) : (<input type="file" onChange={handleImage} />)}
+
     </div>
   )
 }

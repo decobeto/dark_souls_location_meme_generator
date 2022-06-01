@@ -1,18 +1,25 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { decode } from 'base-64'
 
 
 export function Meme(encodedImage){
-  const [image, setImage] = useState(null)
+
+  const myCanvas = useRef()
 
   useEffect(() => {
-    if(base64){
-    
+    if(encodedImage){
+      console.log(encodedImage.encodedImage)
+      const context = myCanvas.current.getContext("2d")
+      const image = new Image()
+      image.src = decode(encodedImage.encodedImage)
+      image.onload = () => {
+        context.drawImage(image, 0, 0, 1280, 720)
+      }
     }
     
-  }, [base64])
+  }, [encodedImage])
 
   return (
-    <img src={decode(encodedImage.base64)} />
+    <canvas ref={myCanvas} width={1280} height={720} />
   )
 }
